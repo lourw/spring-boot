@@ -23,7 +23,7 @@
       "default",
       "!{projectRoot}/src/test/**/*"
     ]
-  }
+  },
   "nxCloudUrl": "https://snapshot.nx.app",
   "nxCloudId": "67c793968d64b278604f2195"
 }
