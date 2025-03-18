@@ -1,0 +1,10 @@
+distribute-on:
+  default: "16 linux-medium-jvm"
+
+assignment-rules: 
+  - targets:
+      - "*"
+    run-on:
+      - agent: linux-medium-jvm
+        parallelism: 8
+
