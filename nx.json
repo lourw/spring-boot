@@ -5,6 +5,8 @@
       "@nx/gradle": "0.0.0-pr-29464-f9a8c49"
     }
   },
+  "nxCloudUrl": "https://snapshot.nx.app",
+  "nxCloudId": "67c793968d64b278604f2195",
   "plugins": [
     {
       "plugin": "@nx/gradle",
