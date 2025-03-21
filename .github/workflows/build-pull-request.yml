@@ -3,6 +3,10 @@ on: pull_request
 permissions:
   contents: read
 jobs:
+  envs:
+    NX_VERBOSE_LOGGING: true
+    NX_PERF_LOGGING: true
+    NX_BRANCH: main
   build:
     name: Build Pull Request
     if: ${{ github.repository == 'spring-projects/spring-boot' }}
@@ -10,6 +14,25 @@ jobs:
     steps:
       - name: Check Out Code
         uses: actions/checkout@v4
+
+      - name: Java 
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: List directories
+        run: ls -laR .nx
+
+      - name: Show projects (cold)
+        run: npx nx show projects
+
+      - name: Show projects (warm)
+        run: npx nx show projects
+
+      - name: Run to cache
+        run: npx nx build spring-boot-starter
+
       - name: Build
         id: build
         uses: ./.github/actions/build
