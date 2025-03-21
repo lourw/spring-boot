@@ -3,11 +3,11 @@ on: pull_request
 permissions:
   contents: read
 jobs:
-  envs:
-    NX_VERBOSE_LOGGING: true
-    NX_PERF_LOGGING: true
-    NX_BRANCH: main
   build:
+    envs:
+      NX_VERBOSE_LOGGING: true
+      NX_PERF_LOGGING: true
+      NX_BRANCH: main
     name: Build Pull Request
     if: ${{ github.repository == 'spring-projects/spring-boot' }}
     runs-on: ${{ vars.UBUNTU_MEDIUM || 'ubuntu-latest' }}
