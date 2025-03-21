@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   build:
-    envs:
+    env:
       NX_VERBOSE_LOGGING: true
       NX_PERF_LOGGING: true
     name: Build Pull Request
