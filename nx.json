@@ -23,5 +23,7 @@
       "default",
       "!{projectRoot}/src/test/**/*"
     ]
-  }
+  },
+  "nxCloudUrl": "http://localhost:4203",
+  "nxCloudId": "67f4292f62e5e169cafdd10c"
 }
