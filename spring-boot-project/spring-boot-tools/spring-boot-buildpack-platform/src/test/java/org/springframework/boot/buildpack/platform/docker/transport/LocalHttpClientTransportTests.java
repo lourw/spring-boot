@@ -48,8 +48,7 @@ class LocalHttpClientTransportTests {
 	@Test
 	void createWhenDockerHostIsFileThatDoesNotExistReturnsTransport(@TempDir Path tempDir) {
 		String socketFilePath = Paths.get(tempDir.toString(), "dummy").toAbsolutePath().toString();
-		DockerHostConfiguration dockerHostConfiguration = DockerHostConfiguration.forAddress(socketFilePath);
-		ResolvedDockerHost dockerHost = ResolvedDockerHost.from(dockerHostConfiguration);
+		ResolvedDockerHost dockerHost = ResolvedDockerHost.from(DockerHostConfiguration.forAddress(socketFilePath));
 		LocalHttpClientTransport transport = LocalHttpClientTransport.create(dockerHost);
 		assertThat(transport).isNotNull();
 		assertThat(transport.getHost().toHostString()).isEqualTo(socketFilePath);
@@ -57,8 +56,8 @@ class LocalHttpClientTransportTests {
 
 	@Test
 	void createWhenDockerHostIsAddressReturnsTransport() {
-		DockerHostConfiguration dockerHostConfiguration = DockerHostConfiguration.forAddress("tcp://192.168.1.2:2376");
-		ResolvedDockerHost dockerHost = ResolvedDockerHost.from(dockerHostConfiguration);
+		ResolvedDockerHost dockerHost = ResolvedDockerHost
+			.from(DockerHostConfiguration.forAddress("tcp://192.168.1.2:2376"));
 		LocalHttpClientTransport transport = LocalHttpClientTransport.create(dockerHost);
 		assertThat(transport).isNotNull();
 		assertThat(transport.getHost().toHostString()).isEqualTo("tcp://192.168.1.2:2376");
