@@ -84,22 +84,26 @@ public class ResolvedDockerHost extends DockerHost {
 	static ResolvedDockerHost from(Environment environment, DockerHostConfiguration dockerHost) {
 		DockerConfigurationMetadata config = DockerConfigurationMetadata.from(environment);
 		if (environment.get(DOCKER_CONTEXT) != null) {
-			throw new IllegalStateException("This is not good");
+			DockerContext context = config.forContext(environment.get(DOCKER_CONTEXT));
+			return new ResolvedDockerHost(context.getDockerHost(), context.isTlsVerify(), context.getTlsPath());
 		}
 		if (dockerHost != null && dockerHost.getContext() != null) {
-			throw new IllegalStateException("This is not good2");
+			DockerContext context = config.forContext(dockerHost.getContext());
+			return new ResolvedDockerHost(context.getDockerHost(), context.isTlsVerify(), context.getTlsPath());
 		}
 		if (environment.get(DOCKER_HOST) != null) {
-			throw new IllegalStateException("This is not good3 with host:" + environment.get(DOCKER_HOST));
+			return new ResolvedDockerHost(environment.get(DOCKER_HOST), isTrue(environment.get(DOCKER_TLS_VERIFY)),
+					environment.get(DOCKER_CERT_PATH));
 		}
 		if (dockerHost != null && dockerHost.getAddress() != null) {
 			return new ResolvedDockerHost(dockerHost.getAddress(), dockerHost.isSecure(),
 					dockerHost.getCertificatePath());
 		}
 		if (config.getContext().getDockerHost() != null) {
-			throw new IllegalStateException("This is not good5");
+			DockerContext context = config.getContext();
+			return new ResolvedDockerHost(context.getDockerHost(), context.isTlsVerify(), context.getTlsPath());
 		}
-		throw new IllegalStateException("This is not good6");
+		return new ResolvedDockerHost(getDefaultAddress());
 	}
 
 	private static String getDefaultAddress() {
