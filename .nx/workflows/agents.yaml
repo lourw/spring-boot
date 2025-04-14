@@ -16,11 +16,6 @@ launch-templates:
           sudo apt update
           sudo apt install -y openjdk-21-jdk
           java -version
-      - name: Setup locales
-        script: | 
-          export LANG=C.UTF-8
-          export LANGUAGE=C.UTF-8
-          export LC_ALL=C.UTF-8
       - name: Setup gradle
         script: ./gradlew wrapper && ./gradlew --stop && ./gradlew clean
 
