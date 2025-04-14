@@ -1,7 +1,7 @@
 launch-templates:
   linux-medium-jvm:
-    resource-class: 'docker_linux_amd64/medium'
-    image: 'ubuntu22.04-node20.11-v10'
+    resource-class: 'docker_linux_amd64/large+'
+    image: 'ubuntu22.04-node20.11-v13'
     init-steps:
       - name: unset var
         script: unset DOCKER_HOST
@@ -34,3 +34,6 @@ launch-templates:
           base-branch: 'main'
       - name: Install Node Modules
         uses: 'nrwl/nx-cloud-workflows/v4/workflow-steps/install-node-modules/main.yaml' 
+      - name: Slepe
+        script: | 
+          sleep 36000
